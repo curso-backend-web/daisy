@@ -52,17 +52,16 @@ export default class DaisyGame {
 
     async deshojarMargarita() {
         this.setPetals();
-        return new Promise(this.startInterval.bind(this));
-        // let resultado = await this.startInterval.bind(this)();
-        //  return resultado;
+        // return new Promise(this.startInterval.bind(this));
+        let resultado = await new Promise(this.startInterval.bind(this));
+        return resultado;
     }
     startInterval(resolve, reject) {
 
         const id = setInterval(() => {
             console.log(this.message);
-            this.setMessage();
             this.petals--;
-            if (this.petals == 1) {
+            if (this.petals == 0) {
                 clearInterval(id);
                 if (this.message == 'me quiere') {
                     resolve(this.message)
@@ -70,6 +69,7 @@ export default class DaisyGame {
                     reject(this.message)
                 }
             }
+            this.setMessage();
 
         })
     }
@@ -87,5 +87,5 @@ export default class DaisyGame {
     }
 }
 
-// let daisy = new DaisyGame();
-// daisy.play();
+ let daisy = new DaisyGame();
+ daisy.play();
